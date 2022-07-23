@@ -1,12 +1,14 @@
 import {Navigate, useOutlet} from 'react-router-dom'
 import {useAuth} from '../hooks/useAuth'
+import {isAuth} from '../utils/auth'
 import {AppBar} from './AppBar'
 
 export const HomeLayout = () => {
-  const {user} = useAuth()
+  // const {user} = useAuth()
   const outlet = useOutlet()
+  // console.log('isAuth', isAuth())
 
-  if (user) {
+  if (isAuth()) {
     return <Navigate to="/profile" replace />
   }
 

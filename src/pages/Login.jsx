@@ -1,45 +1,64 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Link as RouterLink } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import * as React from 'react'
+import Avatar from '@mui/material/Avatar'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Link from '@mui/material/Link'
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import Typography from '@mui/material/Typography'
+import Container from '@mui/material/Container'
+import {Link as RouterLink} from 'react-router-dom'
+import {useAuth} from '../hooks/useAuth'
+import axios from 'axios'
 
 export const LoginPage = () => {
-  const { login } = useAuth();
+  const {login} = useAuth()
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    login({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const handleSubmit = event => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+
+    let dataSubmit = {
+      email: data.get('email'),
+      password: data.get('password'),
+    }
+    // console.log('data', dataSubmit)
+
+    axios({
+      method: 'post',
+      url: 'https://anhkiettest.herokuapp.com/auth/login',
+      data: dataSubmit,
+      // headers: {'Content-Type': 'multipart/form-data'},
+    })
+      .then(function (response) {
+        //handle success
+        // console.log(response)
+        login(response.data)
+      })
+      .catch(function (response) {
+        //handle error
+        console.log(response)
+      })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+        <Avatar sx={{m: 1, bgcolor: 'primary.main'}}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Log In
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
           <TextField
             margin="normal"
             required
@@ -64,7 +83,7 @@ export const LoginPage = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{mt: 3, mb: 2}}
           >
             Login In
           </Button>
@@ -80,5 +99,5 @@ export const LoginPage = () => {
         </Box>
       </Box>
     </Container>
-  );
-};
+  )
+}

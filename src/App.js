@@ -56,8 +56,8 @@ export default function App() {
       </Route>
 
       <Route path="/" element={<ProtectedLayout />}>
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="settings" element={<SettingsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/settings" element={<SettingsPage />} />
       </Route>
     </Routes>
   )
