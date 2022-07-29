@@ -23,6 +23,7 @@ export const AuthProvider = ({children}) => {
   const logout = () => {
     window.localStorage.removeItem('accessToken')
     window.localStorage.removeItem('refreshToken')
+    window.localStorage.removeItem('user')
     navigate('/login', {replace: true})
   }
 

@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import {Link as RouterLink} from 'react-router-dom'
 import {useAuth} from '../hooks/useAuth'
-import axios from 'axios'
+import axios from '../axios/axios.js'
 
 export const LoginPage = () => {
   const {login} = useAuth()
@@ -25,12 +25,12 @@ export const LoginPage = () => {
     }
     // console.log('data', dataSubmit)
 
-    axios({
-      method: 'post',
-      url: 'https://anhkiettest.herokuapp.com/auth/login',
-      data: dataSubmit,
-      // headers: {'Content-Type': 'multipart/form-data'},
-    })
+    axios
+      .post(
+        'auth/login',
+        dataSubmit,
+        // headers: {'Content-Type': 'multipart/form-data'},
+      )
       .then(function (response) {
         //handle success
         // console.log(response)
