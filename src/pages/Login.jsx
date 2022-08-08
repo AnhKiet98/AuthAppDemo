@@ -10,7 +10,8 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import {Link as RouterLink} from 'react-router-dom'
 import {useAuth} from '../hooks/useAuth'
-import axios from '../axios/axios.js'
+import axios from 'axios'
+// import axios from '../axios/axios.js'
 
 export const LoginPage = () => {
   const {login} = useAuth()
